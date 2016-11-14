@@ -20,7 +20,7 @@ if (!bcrypt) {
 var blah = bcrypt.hash;
 
 bcrypt.hash = function(resultPassword, salt, callback) {
-	if (bcryptVar == "bcrypt") { // bcrypt
+	if (bcryptVar === "bcrypt") { // bcrypt
 		return blah(resultPassword, salt, callback);
 	} else { // bcrypt-node
 		return blah(resultPassword, salt, null, callback);
