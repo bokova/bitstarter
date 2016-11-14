@@ -17,13 +17,13 @@ if (!bcrypt) {
 	bcryptVar = "bcypt-nodejs";
 }
 
-var clone = bcrypt.hash;
+var blah = bcrypt.hash;
 
 bcrypt.hash = function(resultPassword, salt, callback) {
 	if (bcryptVar == "bcrypt") { // bcrypt
-		return clone(resultPassword, salt, callback);
+		return blah(resultPassword, salt, callback);
 	} else { // bcrypt-node
-		return clone(resultPassword, salt, null, callback);
+		return blah(resultPassword, salt, null, callback);
 	}
 }
 
