@@ -2,7 +2,7 @@
 
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var bcrypt = require('../platform-dep.js').bcrypt;
+var bcrypt = require('../services/platform-dep.js');
 var db = require('../database.js');
 var config = require('../config.js');
 var MySQLStore = require('express-mysql-session')(session);

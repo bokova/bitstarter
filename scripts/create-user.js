@@ -1,6 +1,6 @@
 var prompt = require('prompt');
 var db = require('../database.js');
-var bcrypt = require('../platform-dep.js').bcrypt;
+var bcrypt = require('../services/platform-dep.js');
 
 // input data schema
 var schema = {
@@ -44,7 +44,7 @@ var schema = {
 prompt.start();
 
 // get the properties for the new user
-prompt.get(schema, function (err, result) {
+prompt.get(schema, function(err, result) {
 
 	// check if the username exists
 	db('users')
@@ -59,14 +59,14 @@ prompt.get(schema, function (err, result) {
 
 	// bcrypt the password
 	var rounds = 1;
-	var salt = bcrypt.genSaltSync(10);
+	// var salt = bcrypt.genSaltSync(10);
 	bcrypt.genSalt(rounds, function(err, salt) {
 
 		// bcrypt-nodejs needs an extra callback *progress*. Replaced with *null* per
 		// http://stackoverflow.com/questions/21022328/no-callback-error-shown-when-using-bcrypt-node
 		// needs testing on a Unix/Linux machine
 
-		bcrypt.hash(result.password, salt, null, function(err, hash) {
+		bcrypt.hash(result.password, salt, function(err, hash) {
 			// store new user in db
 			db('users')
 				.insert({
@@ -84,5 +84,5 @@ prompt.get(schema, function (err, result) {
 		});
 	});
 
-	
+
 });
