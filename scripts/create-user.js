@@ -59,7 +59,6 @@ prompt.get(schema, function(err, result) {
 
 	// bcrypt the password
 	var rounds = 1;
-	// var salt = bcrypt.genSaltSync(10);
 	bcrypt.genSalt(rounds, function(err, salt) {
 
 		// bcrypt-nodejs needs an extra callback *progress*. Replaced with *null* per
