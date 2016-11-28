@@ -1,26 +1,36 @@
 'use strict'
 
 var db = require('../database.js');
-var _ = require('underscore');
-
 
 module.exports = function(app) {
-	// it has to be able to add one or more adresses
-	var adresses
-	_.each(adresses, function(element, index){
-		req.body.adrress
-	})
 
+	app.get('/projects/add', function(req, res) {
+		res.render('projects-add');
+	}),
 
-	app.post('/addproject', function(req, res) {
-		db('projects')
-		.insert({
-		name : req.body.projectName,
-		description : req.body.description,
-		address : req.body.address,
-		}).catch(funciton(error){
-			console.log(error);
+	app.post('/projects', function(req, res) {
+		db.transaction(function(trx){
+			db('projects')
+			.transacting(trx)
+			.insert({
+				name : req.body.name,
+				description : req.body.description,
+				goal_amount : req.body.amount,
+			})
+			.then(function(result){
+				db('project_addresses')
+				.insert({
+					project_id : result,
+					token : req.body.token
+				}).then(function(result) {
+					res.redirect('/');
+				})
+			})
+			.then(trx.commit)
+			.catch(trx.rollback)
+			.catch(function(error) {
+				console.log(error);
+			})
 		})
 	})
-
 } // closing module.export

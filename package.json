@@ -4,7 +4,7 @@
   "description": "Crowd funding for goals and projects with Bitcoin.",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha test/test.js",
+    "test": "grunt",
     "start": "node index.js"
   },
   "repository": {
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/Learn-by-doing/bitstarter#readme",
   "dependencies": {
-    "bcrypt": "^0.8.7",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
     "chai": "^3.5.0",
     "express": "4.14.0",
@@ -38,6 +38,7 @@
     "grunt": "^1.0.1",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-eslint": "^19.0.0",
+    "grunt-mocha-test": "^0.13.2",
     "gruntify-eslint": "^3.1.0"
   }
 }
