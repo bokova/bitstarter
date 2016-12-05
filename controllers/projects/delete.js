@@ -4,7 +4,7 @@ var db = require('../../database.js');
 
 module.exports = function(app) {
 
-	app.post('/projects/delete/:id', function(req, res) {
+	app.get('/projects/delete/:id', function(req, res) {
 		var id = req.params.id;
 		db.transaction(function(trx) {
 			// Note: make sure an address can be assigned to 1 project only or that no other project uses it
