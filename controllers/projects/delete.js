@@ -1,10 +1,11 @@
 'use strict'
 
 var db = require('../../database.js');
+var middleware = require('../../middleware/authentication.js');
 
 module.exports = function(app) {
 
-	app.get('/projects/delete/:id', function(req, res) {
+	app.get('/projects/delete/:id', middleware.requireAuthentication, function(req, res) {
 		var id = req.params.id;
 		db.transaction(function(trx) {
 			// Note: make sure an address can be assigned to 1 project only or that no other project uses it
